@@ -1,33 +1,34 @@
 import React from 'react';
 
-import { getWeather, searchCity } from './searchAction';
+import { getWeather, search } from './searchAction';
+import { get } from 'http';
 
 export default class SearchBar extends React.Component {
     constructor(props) {
         super(props);
        
         this.handleButton = this.handleButton.bind(this);
-        this.handleSearch = this.handleSearch.bind(this);
+        this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleButton(event) {
-        event.preventDefault();
-        const { dispatch } = this.props;
-        const { value } = event.target;
-        dispatch(getWeather(value));
-    }
-
-    handleSearch(event) {
+      event.preventDefault();
       const { dispatch } = this.props;
       const { value } = event.target;
-      dispatch(searchCity(value))
+      dispatch(getWeather(value));
     }
 
-    handleSubmit(event) {
-        event.preventDefault();
-        const { dispatch, city } = this.props;
-        dispatch(getWeather(city));
+    handleChange(event) {
+      event.preventDefault();
+      const { dispatch } = this.props;
+      const { value } = event.target;
+      dispatch(search(value))
+    }
+
+    handleSubmit() {
+      const { dispatch, city } = this.props;
+      dispatch(getWeather(city));
     }
     
   render() {
@@ -52,9 +53,9 @@ export default class SearchBar extends React.Component {
             <button
               type='button' 
               className='btn btn-primary' 
-              value='Washington D.C.'
-              name='Washington D.C.'
-              onClick={this.handleButton}>Washington D.C.
+              value='Portland'
+              name='Portland'
+              onClick={this.handleButton}>Portland
             </button>
             <button
               type='button' 
@@ -77,11 +78,11 @@ export default class SearchBar extends React.Component {
               className='form-control'
               placeholder='Enter city'
               value={value}
-              onChange={this.handleSearch}
+              onChange={this.handleChange}
               />
             <button
               className='btn btn-success'
-              onClick={() => this.handleSubmit}>Go!
+              onClick={this.handleSubmit}>Go!
             </button>
           </div>
         </div>

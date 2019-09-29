@@ -2,6 +2,7 @@ import moment from 'moment';
 
 const initialState = { 
   cityData: '',
+  searchCity: '',
   city: '',
   lat: null,
   lon: null,
@@ -43,16 +44,17 @@ export default function searchReducer(state = initialState,  action) {
             }
         }
 
-        case 'GET_WEATHER_FAIL': {
-            return {
-              ...state,
-              error: true
-            }
-        }
+        // case 'GET_WEATHER_FAIL': {
+        //     return {
+        //       ...state,
+        //       error: true
+        //     }
+        // }
 
         case 'CITY_NAME': {
             return{
               ...state, 
+              cityData: payload.data,
               city: payload.city
             }
         }  

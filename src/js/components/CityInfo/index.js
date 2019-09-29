@@ -4,6 +4,7 @@ import CityInfo from './CityInfo';
 function mapStoreToProps(store) {
     return{
         cityData: store.search.cityData,
+        searchCity: store.search.city,
         city: store.search.city,
         lat: store.search.lat,
         lon: store.search.lon,
