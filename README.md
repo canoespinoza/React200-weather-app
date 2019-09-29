@@ -1,0 +1,1 @@
+This app is allows you to find the weather of any real city in the world (as long as it's spelled correctly). Clone the repo and check it out!
