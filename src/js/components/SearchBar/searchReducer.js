@@ -1,6 +1,7 @@
 import moment from 'moment';
 
 const initialState = { 
+  cityData: '',
   city: '',
   lat: null,
   lon: null,
@@ -18,22 +19,23 @@ export default function searchReducer(state = initialState,  action) {
     const { type, payload } = action;
 
     switch (type) {
-        case 'GET_WEATHER' : {
+        case 'GET_WEATHER_FULFILLED' : {
             return {
                 ...state,
-                city: payload.name,
-                lat: payload.coord.lat,
-                lon: payload.coord.lon,
-                temp: payload.main.temp.toFixed(0),
-                pressure: payload.main.pressure,
-                humidity: payload.main.humidity,
-                lowTemp: payload.main.temp_min.toFixed(0),
-                highTemp: payload.main.temp_max.toFixed(0),
-                windSpeed: payload.wind.speed,
+                cityData: payload.data,
+                city: payload.data.name,
+                lat: payload.data.coord.lat,
+                lon: payload.data.coord.lon,
+                temp: payload.data.main.temp.toFixed(0),
+                pressure: payload.data.main.pressure,
+                humidity: payload.data.main.humidity,
+                lowTemp: payload.data.main.temp_min.toFixed(0),
+                highTemp: payload.data.main.temp_max.toFixed(0),
+                windSpeed: payload.data.wind.speed,
                 error: false,
                 history: [
                     ...state.history,
-                    { city: payload.name, 
+                    { city: payload.data.name, 
                         date: moment().format('l'),
                         time: moment().format('h:mm:ss a')
                     }
@@ -51,7 +53,7 @@ export default function searchReducer(state = initialState,  action) {
         case 'CITY_NAME': {
             return{
               ...state, 
-              name: payload.name
+              city: payload.city
             }
         }  
 

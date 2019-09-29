@@ -3,8 +3,9 @@ import SearchBar from './SearchBar';
 
 function mapStoreToProps(store) {
     return{
-       name: store.search.city
+        cityData: store.search.cityData,
+        city: store.search.city,
     };
 }
 
-export default connect(undefined, mapStoreToProps)(SearchBar);
+export default connect(mapStoreToProps)(SearchBar);

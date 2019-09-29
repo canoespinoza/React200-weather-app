@@ -1,23 +1,15 @@
 const axios = require('axios');
 
-export function getWeather(name) {
+export function getWeather(city) {
   return {
     type: 'GET_WEATHER',
     payload: axios.get(`/search/${city}`)
   };
 }
 
-export function searchCity(name) {
+export function searchCity(city) {
   return {
       type:'CITY_NAME',
-      payload: { name }
+      payload: { city }
   };
 }
-
-// export const getWeather = city => {
-//   return dispatch => {
-//     axios.get(`/search/${city}`)
-//       .then(response => dispatch({ type: 'GET_WEATHER', payload: response.data }))
-//       .catch(err => dispatch({ type: 'GET_WEATHER_FAIL', error: true }))
-//   }
-// }

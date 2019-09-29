@@ -5,68 +5,79 @@ import { getWeather, searchCity } from './searchAction';
 export default class SearchBar extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            city: ''
-        };
-        this.handleChange = this.handleChange.bind(this);
+       
+        this.handleButton = this.handleButton.bind(this);
+        this.handleSearch = this.handleSearch.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleChange(event) {
+    handleButton(event) {
+        event.preventDefault();
         const { dispatch } = this.props;
         const { value } = event.target;
-        dispatch(searchCity(value));
+        dispatch(getWeather(value));
+    }
+
+    handleSearch(event) {
+      const { dispatch } = this.props;
+      const { value } = event.target;
+      dispatch(searchCity(value))
     }
 
     handleSubmit(event) {
         event.preventDefault();
-        const { dispatch, name } = this.props;
-        dispatch(getWeather(name));
+        const { dispatch, city } = this.props;
+        dispatch(getWeather(city));
     }
     
   render() {
-    const {name} = this.props
+    const {value} = this.props
     return (
         <div className='container'>
           <div className='btn-group' role='group'>
             <button 
               type='button'
               className='btn btn-primary' 
+              value='San Diego'
               name='San Diego'
-              onClick={this.handleSubmit}>San Diego
+              onClick={this.handleButton}>San Diego
             </button>
             <button 
               type='button'
               className='btn btn-primary' 
+              value='New York'
               name='New York'
-              onClick={this.handleSubmit}>New York
+              onClick={this.handleButton}>New York
             </button>
             <button
               type='button' 
               className='btn btn-primary' 
+              value='Washington D.C.'
               name='Washington D.C.'
-              onClick={this.handleSubmit}>Washington D.C.
+              onClick={this.handleButton}>Washington D.C.
             </button>
             <button
               type='button' 
               className='btn btn-primary' 
+              value='London'
               name='London'
-              onClick={this.handleSubmit}>London
+              onClick={this.handleButton}>London
             </button>
             <button 
               type='button'
               className='btn btn-primary' 
+              value='Tokyo'
               name='Tokyo'
-              onClick={this.handleSubmit}>Tokyo
+              onClick={this.handleButton}>Tokyo
             </button>
           </div>
           <div className='form-group'>
             <input
-              type='city'
+              type='text'
               className='form-control'
               placeholder='Enter city'
-              value={name}
-              onChange={this.handleChange}
+              value={value}
+              onChange={this.handleSearch}
               />
             <button
               className='btn btn-success'
